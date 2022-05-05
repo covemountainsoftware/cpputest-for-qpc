@@ -1,0 +1,45 @@
+﻿---
+BasedOnStyle: WebKit
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
+AlignEscapedNewlines: DontAlign
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
+AlignConsecutiveDeclarations: None
+AlignOperands: Align
+AlignTrailingComments: true
+AllowAllConstructorInitializersOnNextLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+BreakAfterJavaFieldAnnotations: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Stroustrup
+BreakConstructorInitializers: AfterColon
+ColumnLimit: 80
+CompactNamespaces: false
+ContinuationIndentWidth: 2
+Cpp11BracedListStyle: true
+FixNamespaceComments: true
+MaxEmptyLinesToKeep: 1
+IndentCaseLabels: true
+IndentWidth: 4
+IndentPPDirectives: BeforeHash
+NamespaceIndentation: None
+SortIncludes: Never
+SpacesBeforeTrailingComments: 3
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInAngles: Never
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+Standard: c++14
+UseTab: Never
+
+...
