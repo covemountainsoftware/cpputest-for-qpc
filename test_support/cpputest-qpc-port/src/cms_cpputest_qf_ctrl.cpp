@@ -124,11 +124,14 @@ void MoveTimeForward(const std::chrono::milliseconds& duration)
 
     double millisecondsPerTick = 1000.0 / l_ticksPerSecond;
 
-    // if called, ensure at least one tick is processed
-    uint64_t ticks = std::max(
-      1UL, static_cast<uint64_t>(duration.count() / millisecondsPerTick));
+    using LoopCounter_t = uint64_t;
 
-    for (uint64_t i = 0; i < ticks; ++i) {
+    constexpr LoopCounter_t ONCE = 1;
+    // if called, ensure at least one tick is processed
+    LoopCounter_t ticks = std::max(
+      ONCE, static_cast<LoopCounter_t>(duration.count() / millisecondsPerTick));
+
+    for (LoopCounter_t i = 0; i < ticks; ++i) {
         QF_tickX_(0U);
         ProcessEvents();
     }
