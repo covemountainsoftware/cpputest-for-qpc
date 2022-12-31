@@ -3,12 +3,11 @@ QP/C Real-Time Embedded Framework (qpc) is licensed under a
 dual-licensing model, with the default license being GPL. 
 
 Most of the files present in this repository are only needed for 
-host PC based test execution. However, a few of the examples and 
-files may find their way into a product's build. But guess what? 
+host PC based test execution. However, a few of the examples 
+and files may find their way into a product's build. 
 
-The commercial license is free! Simply register the 
-product line using this software, and I will provide a free 
-commercial friendly license.
+To request a commercial license see contact information 
+below.
 
 Contact Information:
 ====================
