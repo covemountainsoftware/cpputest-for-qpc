@@ -32,8 +32,6 @@
 
 namespace cms {
 
-#define DUMMY_AO_MODULE_NAME "DummyActiveObject"
-
 /// The Dummy Active Object may be used
 /// when an active object (AO) under test is
 /// interacting with another AO during a test.
@@ -69,7 +67,6 @@ public:
 
     void dummyStart(uint_fast8_t priority = 1)
     {
-        Q_DEFINE_THIS_MODULE(DUMMY_AO_MODULE_NAME);
         QACTIVE_START(&m_super, priority,
                       m_incomingEvents.data(), m_incomingEvents.size(),
                       nullptr, 0, nullptr);
