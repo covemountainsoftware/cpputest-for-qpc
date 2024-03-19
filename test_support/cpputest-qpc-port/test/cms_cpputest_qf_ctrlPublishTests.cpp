@@ -85,7 +85,6 @@ TEST(qf_ctrlPublishTests, qf_ctrl_provides_a_qevt_publish_from_test_helper_func)
     qf_ctrl::PublishEvent(e);
     qf_ctrl::ProcessEvents();
     CHECK_TRUE(mRecorder->isSignalRecorded(TEST1_PUBLISH_SIG));
-    QF_gc(e);
 }
 
 TEST(qf_ctrlPublishTests,
@@ -94,7 +93,6 @@ TEST(qf_ctrlPublishTests,
     auto e = Q_NEW(QEvt, TEST1_PUBLISH_SIG);
     qf_ctrl::PublishAndProcess(e);
     CHECK_TRUE(mRecorder->isSignalRecorded(TEST1_PUBLISH_SIG));
-    QF_gc(e);
 }
 
 TEST(qf_ctrlPublishTests,
@@ -103,5 +101,4 @@ TEST(qf_ctrlPublishTests,
     auto e = Q_NEW(QEvt, TEST1_PUBLISH_SIG);
     qf_ctrl::PublishAndProcess(e, mRecorder);
     CHECK_FALSE(mRecorder->isSignalRecorded(TEST1_PUBLISH_SIG));
-    QF_gc(e);
 }

@@ -54,12 +54,12 @@ public:
         return QEQueue_post(&m_queue, e, margin, 0);
     }
 
-    bool isEmpty()
+    bool isEmpty() const
     {
         return QEQueue_isEmpty(&m_queue);
     }
 
-    QEQueueCtr getNFree()
+    QEQueueCtr getNFree() const
     {
         return QEQueue_getNFree(&m_queue);
     }

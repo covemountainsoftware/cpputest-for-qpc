@@ -24,11 +24,12 @@
 #define QP_IMPL //allow access to some QF/QP internals for test purposes
 #include "qpc.h"
 #include "CppUTest/TestHarness.h"
+#include "qp_pkg.h"
 
 extern "C" void QF_onCleanup(void)
 {
-    for (int i = 0; i < QF_maxPool_; ++i) {
-        CHECK_TRUE_TEXT(QF_pool_[i].nTot == QF_pool_[i].nFree,
+    for (int i = 0; i < QF_priv_.maxPool_; ++i) {
+        CHECK_TRUE_TEXT(QF_priv_.ePool_[i].nTot == QF_priv_.ePool_[i].nFree,
                         "A leak was detected in an internal QF event pool!");
     }
 }

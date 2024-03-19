@@ -27,7 +27,6 @@
 #include <chrono>
 #include "qpc.h"
 #include "hwLockCtrl.h"
-#include "pub_sub_signals.h"
 #include "hwLockCtrlService.h"
 #include "cms_cpputest_qf_ctrl.hpp"
 #include "cmsTestPublishedEventRecorder.hpp"
@@ -414,8 +413,7 @@ TEST(HwLockCtrlServiceTests, the_service_responds_to_a_ping_with_a_pong)
     // to an event with a POST directly to an external requesting AO.
 
     PongEvent pongEvent;
-    pongEvent.super.sig = 0;
-    pongEvent.source    = nullptr;
+    QEvt_ctor(&pongEvent.super, 0);
 
     auto dummy = std::unique_ptr<cms::DefaultDummyActiveObject>(
       new cms::DefaultDummyActiveObject());
@@ -432,9 +430,7 @@ TEST(HwLockCtrlServiceTests, the_service_responds_to_a_ping_with_a_pong)
     // Send the Ping to our AO under test and give it
     // some processing time.
     PingEvent pingEvent;
-    pingEvent.super.sig = HW_LOCK_CTRL_PING_SIG;
-    pingEvent.super.poolId_ = 0;
-    pingEvent.super.refCtr_ = 0;
+    QEvt_ctor(&pingEvent.super, HW_LOCK_CTRL_PING_SIG);
     pingEvent.requester = dummy->getQActive();
     pingEvent.response_sig = RESPONSE_SIG;
 

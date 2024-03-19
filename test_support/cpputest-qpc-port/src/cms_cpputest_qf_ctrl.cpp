@@ -27,7 +27,6 @@
 #include "cmsTestPublishedEventRecorder.hpp"
 #include <algorithm>
 #include <cassert>
-#include <cstdint>
 #include <vector>
 #include "CppUTest/TestHarness.h"
 
@@ -68,7 +67,9 @@ void Setup(enum_t const maxPubSubSignalValue, uint32_t ticksPerSecond,
     l_ticksPerSecond    = ticksPerSecond;
     l_subscriberStorage = new SubscriberList();
     l_subscriberStorage->resize(maxPubSubSignalValue);
-    QSubscrList nullValue = {0};
+    QSubscrList nullValue;
+    QPSet_setEmpty(&nullValue.set);
+    QPSet_setEmpty(&nullValue.set_dis);
     std::fill(l_subscriberStorage->begin(), l_subscriberStorage->end(),
               nullValue);
 
@@ -132,7 +133,7 @@ void MoveTimeForward(const std::chrono::milliseconds& duration)
       ONCE, static_cast<LoopCounter_t>(duration.count() / millisecondsPerTick));
 
     for (LoopCounter_t i = 0; i < ticks; ++i) {
-        QF_tickX_(0U);
+        QTIMEEVT_TICK_X(0U, nullptr);
         ProcessEvents();
     }
 }

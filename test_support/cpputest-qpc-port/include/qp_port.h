@@ -25,27 +25,36 @@
 #ifndef CPPUTEST_FOR_QPC_QF_PORT_H
 #define CPPUTEST_FOR_QPC_QF_PORT_H
 
+#include <stdint.h>  // Exact-width types. WG14/N843 C99 Standard
+#include <stdbool.h> // Boolean type.      WG14/N843 C99 Standard
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#define Q_NORETURN  void
+
+#define QACTIVE_EQUEUE_TYPE  QEQueue
+#define QACTIVE_THREAD_TYPE  bool
+
 #define QF_EQUEUE_TYPE      QEQueue
 #define QF_MAX_ACTIVE       64U
 #define QF_MAX_TICK_RATE    2U
-#define QF_ACTIVE_STOP      1
+#define QACTIVE_CAN_STOP      1
 #define QF_EVENT_SIZ_SIZE   4U
 #define QF_EQUEUE_CTR_SIZE  4U
 #define QF_MPOOL_SIZ_SIZE   4U
 #define QF_MPOOL_CTR_SIZE   4U
 #define QF_TIMEEVT_CTR_SIZE 4U
 
+//cpputest port, no critical sections are necessary
+#define QF_CRIT_STAT
 #define QF_CRIT_ENTRY(dummy)
 #define QF_CRIT_EXIT(dummy)
 
-#include "qep_port.h"
 #include "qequeue.h"
 #include "qmpool.h"
-#include "qf.h"
+#include "qp.h"
 
 void QF_runUntilNoReadyActiveObjects(void);
 
@@ -62,15 +71,15 @@ void QF_runUntilNoReadyActiveObjects(void);
         QPSet_insert(&cpputest_readySet_, (me_)->prio); \
     } while (false)
 
-    #define QF_EPOOL_TYPE_ QMPool
+    // native QF event pool operations
+    #define QF_EPOOL_TYPE_  QMPool
     #define QF_EPOOL_INIT_(p_, poolSto_, poolSize_, evtSize_) \
         (QMPool_init(&(p_), (poolSto_), (poolSize_), (evtSize_)))
-    #define QF_EPOOL_EVENT_SIZE_(p_) ((uint_fast16_t)(p_).blockSize)
-    #define QF_EPOOL_GET_(p_, e_, m_, qs_id_) \
-        ((e_) = (QEvt*)QMPool_get(&(p_), (m_), (qs_id_)))
-    #define QF_EPOOL_PUT_(p_, e_, qs_id_) (QMPool_put(&(p_), (e_), (qs_id_)))
-
-    #include "qf_pkg.h"          /* internal QF interface */
+    #define QF_EPOOL_EVENT_SIZE_(p_)  ((uint_fast16_t)(p_).blockSize)
+    #define QF_EPOOL_GET_(p_, e_, m_, qsId_) \
+        ((e_) = (QEvt *)QMPool_get(&(p_), (m_), (qsId_)))
+    #define QF_EPOOL_PUT_(p_, e_, qsId_) \
+        (QMPool_put(&(p_), (e_), (qsId_)))
 
     extern QPSet cpputest_readySet_; /* QV-ready set of active objects */
 

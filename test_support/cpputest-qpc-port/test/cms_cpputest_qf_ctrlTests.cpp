@@ -28,6 +28,7 @@
 #include "cms_cpputest_qf_ctrl.hpp"
 #include "cmsDummyActiveObject.hpp"
 #include "CppUTest/TestHarness.h"
+#include "qp_pkg.h"
 
 using namespace cms::test;
 
@@ -44,14 +45,17 @@ TEST_GROUP(qf_ctrlTests)
 
     static void ConfirmNumberOfPools(uint32_t poolCount)
     {
-        CHECK_EQUAL(poolCount, QF_maxPool_);
+        CHECK_EQUAL(poolCount, QF_priv_.maxPool_);
     }
 
     static void ConfirmPoolEventSize(uint32_t poolIndex, uint32_t blockSize)
     {
         CHECK_TRUE(poolIndex < QF_MAX_EPOOL);
-        CHECK_TRUE(poolIndex < QF_maxPool_);
-        CHECK_EQUAL(blockSize, QF_pool_[poolIndex].blockSize);
+        CHECK_TRUE(poolIndex < QF_priv_.maxPool_);
+
+        //rounding is now performed in a pool init, hence
+        //confirming requested block size is less than or equal
+        CHECK_TRUE(blockSize <= QF_priv_.ePool_[poolIndex].blockSize);
     }
 };
 
@@ -69,12 +73,12 @@ TEST(qf_ctrlTests, setup_will_create_two_pools_when_requested)
 {
     qf_ctrl::MemPoolConfigs configs;
     configs.push_back(qf_ctrl::MemPoolConfig {sizeof(uint64_t), 10});
-    configs.push_back(qf_ctrl::MemPoolConfig {sizeof(uint64_t) * 2, 5});
+    configs.push_back(qf_ctrl::MemPoolConfig {sizeof(uint64_t) * 5, 5});
 
     qf_ctrl::Setup(10, 1000, configs);
     ConfirmNumberOfPools(2);
     ConfirmPoolEventSize(0, sizeof(uint64_t));
-    ConfirmPoolEventSize(1, sizeof(uint64_t) * 2);
+    ConfirmPoolEventSize(1, sizeof(uint64_t) * 5);
 }
 
 TEST(qf_ctrlTests, setup_will_create_one_pool_when_requested)

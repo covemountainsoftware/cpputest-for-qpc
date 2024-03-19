@@ -24,28 +24,29 @@
 #ifndef QASSERT_MOCK_SUPPORT_HPP
 #define QASSERT_MOCK_SUPPORT_HPP
 
-#include "qassert.h"
+#include "qp_port.h"
+#include "qsafe.h"
 #include "CppUTestExt/MockSupport.h"
 
 namespace cms {
 namespace test {
 
 static constexpr const char* QASSERT_MOCK_NAME  = "QASSERT";
-static constexpr const char* ONASSERT_FUNC_NAME = "Q_onAssert";
+static constexpr const char* ONERROR_FUNC_NAME  = "Q_onError";
 
 inline void MockExpectQAssert()
 {
     mock(QASSERT_MOCK_NAME)
-      .expectOneCall(ONASSERT_FUNC_NAME)
+      .expectOneCall(ONERROR_FUNC_NAME)
       .ignoreOtherParameters();
 }
 
-inline void MockExpectQAssert(const char* file, int loc)
+inline void MockExpectQAssert(const char* module, int id)
 {
     mock(QASSERT_MOCK_NAME)
-      .expectOneCall(ONASSERT_FUNC_NAME)
-      .withParameter("file", file)
-      .withParameter("loc", loc);
+      .expectOneCall(ONERROR_FUNC_NAME)
+      .withParameter("module", module)
+      .withParameter("id", id);
 }
 
 }   // namespace test

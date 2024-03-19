@@ -25,11 +25,10 @@
 
 #include "hwLockCtrlService.h"
 #include "hwLockCtrl.h"
-#include "pub_sub_signals.h"
 #include "hwLockCtrlSelfTestEvent.h"
 #include "pingPongEvents.h"
 #include "bspTicks.h"
-#include "qassert.h"
+#include "qsafe.h"
 #include <stddef.h>
 
 Q_DEFINE_THIS_FILE
@@ -95,11 +94,7 @@ void HwLockCtrlService_ctor()
 
 void HwLockCtrlService_dtor()
 {
-    static const QEvt selfDestructEvent = {
-      SERVICE_DESTRUCTOR_SIG,
-      0U,
-      0U
-    };
+    static QEvt const selfDestructEvent = QEVT_INITIALIZER(SERVICE_DESTRUCTOR_SIG);
 
     Q_ASSERT(g_theHwLockCtrlService != NULL);
 
@@ -291,7 +286,8 @@ void PerformSelfTest(HwLockCtrlService * const me)
     //
     //  https://covemountainsoftware.com/2020/03/08/uml-statechart-handling-errors-when-entering-a-state/
     //
-    static const QEvt event = {REQUEST_GOTO_HISTORY_SIG, 0U, 0U};
+    static QEvt const event = QEVT_INITIALIZER(REQUEST_GOTO_HISTORY_SIG);
+
     QACTIVE_POST_LIFO(&me->super, &event);
 }
 
@@ -300,17 +296,8 @@ void NotifyChangedState(HwLockCtrlService * const me, HwLockCtrlLockState state)
     (void)me; //the QF_PUBLISH macro may not be using that member
               //in some build configurations
 
-    static const QEvt lockedEvent = {
-      HW_LOCK_CTRL_SERVICE_IS_LOCKED_SIG,
-      0U,
-      0U
-    };
-
-    static const QEvt unlockedEvent = {
-      HW_LOCK_CTRL_SERVICE_IS_UNLOCKED_SIG,
-      0U,
-      0U
-    };
+    static QEvt const lockedEvent = QEVT_INITIALIZER(HW_LOCK_CTRL_SERVICE_IS_LOCKED_SIG);
+    static QEvt const unlockedEvent = QEVT_INITIALIZER(HW_LOCK_CTRL_SERVICE_IS_UNLOCKED_SIG);
 
     switch (state) {
         case LOCK_STATE_LOCKED:
