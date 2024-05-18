@@ -7,11 +7,14 @@ set(CMAKE_C_STANDARD 11)
 add_compile_options(-Wall -Wextra -Werror)
 
 include_directories(include)
+
+set(EXTERNALS_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/externals)
+set(CMS_QPC_TOP_DIR ${EXTERNALS_TOP_DIR}/qpc)
+
 include(externals/qpcCMakeSupport.txt)
 
 set(CMS_TEST_SUPPORT_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test_support)
 set(MOCKS_TOP_DIR ${CMS_TEST_SUPPORT_TOP_DIR}/mocks)
-set(EXTERNALS_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/externals)
 set(DRIVERS_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/drivers)
 set(CMS_UTILS_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/utilities)
 
