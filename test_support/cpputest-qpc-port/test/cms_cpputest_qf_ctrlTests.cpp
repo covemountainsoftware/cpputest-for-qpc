@@ -27,7 +27,7 @@
 #include <chrono>
 #include "cms_cpputest_qf_ctrl.hpp"
 #include "cmsDummyActiveObject.hpp"
-#include "CppUTest/TestHarness.h"
+#include "cms_cpputest.hpp"
 #include "qp_pkg.h"
 
 using namespace cms::test;
@@ -128,7 +128,7 @@ TEST(qf_ctrlTests,
             sigTwoCount++;
         }
         else {
-            TEST_EXIT
+            CMS_TEST_EXIT;
         }
     });
 

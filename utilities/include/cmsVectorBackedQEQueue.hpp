@@ -27,6 +27,7 @@
 #include "qpc.h"
 #include <cstdint>
 #include <vector>
+#include <cstdlib>
 
 namespace cms {
 

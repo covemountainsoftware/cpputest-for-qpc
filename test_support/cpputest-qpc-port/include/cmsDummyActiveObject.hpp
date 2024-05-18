@@ -29,6 +29,7 @@
 #include "qpc.h"
 #include <array>
 #include <functional>
+#include <cstdlib>
 
 namespace cms {
 
