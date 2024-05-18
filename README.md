@@ -53,7 +53,7 @@ be compatible with this code.
   * After cloning this repository, do not forget to:
   * `git submodule init`
   * `git submodule update`
-* CppUTest (version 3.8-7, the default in Ubuntu 20.04)
+* CppUTest (version 3.8-7 or version 4.0) (3.8 is the default in Ubuntu 20.04 while 4.0 is the default in Ubuntu 22.04)
 * CMake and associated build tools were used to develop
   and prove out this project.
 * This project requires support for C++14 and C11.
