@@ -25,6 +25,7 @@
 #include "qpc.h"
 
 #include <chrono>
+#include <string>
 #include "cms_cpputest_qf_ctrl.hpp"
 #include "cmsDummyActiveObject.hpp"
 #include "cms_cpputest.hpp"
@@ -146,4 +147,13 @@ TEST(qf_ctrlTests,
 
     CHECK_EQUAL(1, sigOneCount);
     CHECK_EQUAL(3, sigTwoCount);
+}
+
+TEST(qf_ctrlTests, qf_ctrl_provides_cpputest_for_qpc_lib_version)
+{
+    auto version = qf_ctrl::GetVersion();
+    CHECK_TRUE(version != nullptr);
+
+    std::string version_str(version);
+    CHECK_FALSE(version_str.empty());
 }

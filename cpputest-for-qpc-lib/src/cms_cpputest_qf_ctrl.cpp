@@ -189,6 +189,11 @@ void CreatePoolConfigsFromArg(const MemPoolConfigs& pubSubEventMemPoolConfigs)
     }
 }
 
+const char * GetVersion()
+{
+    return CPPUTEST_FOR_QPC_LIB_VERSION;
+}
+
 }   // namespace qf_ctrl
 }   // namespace test
 }   // namespace cms
