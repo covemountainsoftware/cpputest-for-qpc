@@ -16,5 +16,4 @@ add_subdirectory(tests)
 
 target_include_directories(cpputest-for-qpc-lib PUBLIC
         ${CMS_QPC_INCLUDE_DIR}
-        ${CMS_CPPUTEST_QP_PORT_TOP_DIR}/include
-        ${CMS_UTILS_TOP_DIR}/include)
+        include)

@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD 11)
 add_compile_options(-Wall -Wextra -Werror)
 
 set(CMS_EXTERNALS_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/externals)
-set(CMS_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cpputest-for-qpc-lib/cmake)
+set(CMS_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cpputest-for-qpc-lib/cmake CACHE INTERNAL "")
 
 if(NOT DEFINED CMS_QPC_TOP_DIR)
     set(CMS_QPC_TOP_DIR ${CMS_EXTERNALS_TOP_DIR}/qpc)
