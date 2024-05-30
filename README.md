@@ -41,6 +41,10 @@ Benefits of this approach to unit testing active objects include:
   system. Run all the tests with every commit. No surprises when 
   it is time to generate a target release.
 
+**An example project demonstrating the features of this library and 
+how to import and use from with a CMake build environment is available
+here: https://github.com/covemountainsoftware/cpputest-for-qpc-examples**
+
 # Environment
 
 This project was developed and proven in Ubuntu 20.04 and 22.04. In theory any 
@@ -83,6 +87,24 @@ environment, as exceptions are frequently disabled in firmware build targets.
 
 Care was taken to avoid the above in any source code that may ultimately be 
 re-used in an embedded project's target build.
+
+## Using with CMake
+
+If a top-level project adds this repository via `add_subdirectory(cpputest-for-qpc)`
+then the library larget `cpputest-for-qpc-lib` will be available for linking with 
+your CppUTest enabled host based unit-tests. Additionally, the project 
+exports a CMake variable `CMS_CMAKE_DIR` with the path to the internal cmake 
+folder with various helper cmake files. For example, a unit test target may simply
+add: `include(${CMS_CMAKE_DIR}/cpputestCMake.cmake)` to pull in various CppUTest
+behavior and build variables. 
+
+Additionally, the top-level project may set the CMake variable `CMS_QPC_TOP_DIR` 
+to the project's QP/C directory. This prevents `cpputest-for-qpc-lib` from fetching 
+its own copy of QP/C and ensures that both the unit testing environment and the
+target microcontroller build are each using the same version of QP/C.
+
+See the examples project for further details: 
+https://github.com/covemountainsoftware/cpputest-for-qpc-examples
 
 ## Active object interfaces
 
