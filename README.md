@@ -49,15 +49,14 @@ be compatible with this code.
 
 ## Prerequisites
 
-* qpc
-  * You can override the QPC to another directory with your project's exact QPC source code.
-  * or:
-  * After cloning this repository, do not forget to:
-  * `git submodule init`
-  * `git submodule update`
-* CppUTest (version 3.8-7 or version 4.0) (3.8 is the default in Ubuntu 20.04 while 4.0 is the default in Ubuntu 22.04)
 * CMake and associated build tools were used to develop
   and prove out this project.
+* QP/C 
+  * You can override the QPC to another directory with your project's exact QPC source code. 
+    Define the cmake variable CMS_QPC_TOP_DIR before including the internal CMakeLists.txt. 
+  * or:
+    * Do not define CMS_QPC_TOP_DIR, and the internal cmake will fetch the appropriate QP/C repo.
+* CppUTest (version 3.8-7 or version 4.0) (3.8 is the default in Ubuntu 20.04 while 4.0 is the default in Ubuntu 22.04)
 * This project requires support for C++14 and C11.
 
 ## Continuous Integration
