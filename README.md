@@ -1,4 +1,4 @@
-# CppUTest for the QP/C (qpc) Real-Time Embedded Framework
+# CppUTest for the QP/C (qpc) Real-Time Embedded Framework (library only)
 
 Build and Test status: ![Build and Tests](https://github.com/covemountainsoftware/cpputest-for-qpc/actions/workflows/cmake.yml/badge.svg)
 
@@ -12,7 +12,7 @@ encourage and support efforts like this. Thank you!
 
 # Introduction
 
-The `cpputest-for-qpc` project enables CppUTest for the 
+The `cpputest-for-qpc` library project enables CppUTest for the 
 QP/C Real-Time Embedded Framework. This project provides for the 
 following capabilities:
 
@@ -22,7 +22,7 @@ following capabilities:
 * Supporting utilities to simplify unit testing of qpc 
   based active objects. Provided classes may also be useful in 
   the final target software, if C++ is also in use.
-* An example C language based active object under test.
+* A separate examples project providing usage/examples of this library
 
 Benefits of this approach to unit testing active objects include:
 * No surprises. The active object under test interacts with the 
@@ -43,19 +43,20 @@ Benefits of this approach to unit testing active objects include:
 
 # Environment
 
-This project was developed and proven in Ubuntu 20.04. In theory any 
+This project was developed and proven in Ubuntu 20.04 and 22.04. In theory any 
 build or host operating system environment supported by CppUTest will 
 be compatible with this code.
 
 ## Prerequisites
 
-* qpc (pulled in as a git submodule)
-  * After cloning this repository, do not forget to:
-  * `git submodule init`
-  * `git submodule update`
-* CppUTest (version 3.8-7 or version 4.0) (3.8 is the default in Ubuntu 20.04 while 4.0 is the default in Ubuntu 22.04)
 * CMake and associated build tools were used to develop
   and prove out this project.
+* QP/C 
+  * You can override the QPC to another directory with your project's exact QPC source code. 
+    Define the cmake variable CMS_QPC_TOP_DIR before including the internal CMakeLists.txt. 
+  * or:
+    * Do not define CMS_QPC_TOP_DIR, and the internal cmake will fetch the appropriate QP/C repo.
+* CppUTest (version 3.8-7 or version 4.0) (3.8 is the default in Ubuntu 20.04 while 4.0 is the default in Ubuntu 22.04)
 * This project requires support for C++14 and C11.
 
 ## Continuous Integration
@@ -125,7 +126,7 @@ behavior, using the exact same interfaces the active object would use
 in the production target. CppUTest provides for the mocking capabilities to 
 ensure that the active object under test is calling the expected APIs.
 
-Within this project, please see the tests for `examples/hwLockCtrlService` which
+Within the associated examples project, please see the tests for `examples/hwLockCtrlService` which
 provides examples of:
 * Testing for reaction to a published event, where the reaction is observed
   through a CppUTest `mock()`.

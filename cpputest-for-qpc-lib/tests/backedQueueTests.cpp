@@ -21,8 +21,8 @@
 ///***************************************************************************
 /// @endcond
 
-#include "cmsVectorBackedQEQueue.hpp"
-#include "cmsArrayBackedQEQueue.hpp"
+#include "../include/cmsVectorBackedQEQueue.hpp"
+#include "../include/cmsArrayBackedQEQueue.hpp"
 #include <memory>
 #include "CppUTest/TestHarness.h"
 
