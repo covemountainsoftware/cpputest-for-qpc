@@ -62,6 +62,8 @@ void Setup(enum_t maxPubSubSignalValue, uint32_t ticksPerSecond,
            const MemPoolConfigs& pubSubEventMemPoolConfigs = {},
            MemPoolTeardownOption memPoolOpt = MemPoolTeardownOption::CHECK_FOR_LEAKS);
 
+void ChangeMemPoolTeardownOption(MemPoolTeardownOption memPoolOpt);
+
 /// Teardown the QP/QF subsystem after completing a unit test.
 void Teardown();
 
