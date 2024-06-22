@@ -95,6 +95,27 @@ void PublishAndProcess(enum_t sig,
 void PublishAndProcess(QEvt const * e,
                        PublishedEventRecorder* recorder = nullptr);
 
+/// Helper method to Post an event to an active object
+/// followed internally by ProcessEvents().
+/// \param e
+/// \param dest
+inline void PostAndProcess(QEvt const * e, QActive* dest)
+{
+    QACTIVE_POST(dest, e, nullptr);
+    ProcessEvents();
+}
+
+/// Helper method to Post a static const QEvt to an active object
+/// followed internally by ProcessEvents().
+/// \param sig (template param):  the signal value of the const event to post
+/// \param dest : the active object to post to.
+template <enum_t sig>
+inline void PostAndProcess(QActive* dest)
+{
+    static const QEvt constEvent = QEVT_INITIALIZER(sig);
+    PostAndProcess(&constEvent, dest);
+}
+
 /// Get the internal library version string.
 /// Uses semantic versioning.
 const char * GetVersion();
