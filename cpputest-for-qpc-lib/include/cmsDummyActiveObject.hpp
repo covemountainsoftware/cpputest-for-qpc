@@ -30,6 +30,8 @@
 #include <array>
 #include <functional>
 #include <cstdlib>
+#include "cmsVectorBackedQEQueue.hpp"
+#include "qevtUniquePtr.hpp"
 
 namespace cms {
 
@@ -40,15 +42,40 @@ namespace cms {
 template <size_t InternalEventCount>
 class DummyActiveObject  {
 public:
+
+    enum class EventBehavior  {
+        CALLBACK,  //original behavior, will call the provided callback
+        RECORDER   //will record the event
+    };
+
     using PostedEventHandler = std::function<void(QEvt const*)>;
 
-    explicit DummyActiveObject() :
+    DummyActiveObject() :
         m_super(),
         m_eventHandler(nullptr),
-        m_incomingEvents()
+        m_incomingEvents(),
+        m_behavior(EventBehavior::CALLBACK),
+        m_recordedEvents(0)
     {
         m_incomingEvents.fill(nullptr);
         QActive_ctor(&m_super, Q_STATE_CAST(initial));
+    }
+
+    explicit DummyActiveObject(EventBehavior behavior) :
+        m_super(),
+        m_eventHandler(nullptr),
+        m_incomingEvents(),
+        m_behavior(behavior),
+        m_recordedEvents(100)
+    {
+        m_incomingEvents.fill(nullptr);
+        QActive_ctor(&m_super, Q_STATE_CAST(initial));
+
+        if (m_behavior == EventBehavior::RECORDER) {
+            m_eventHandler = [=](QEvt const* e) {
+                this->RecorderEventHandler(e);
+            };
+        }
     }
 
     ~DummyActiveObject()
@@ -63,7 +90,9 @@ public:
 
     void SetPostedEventHandler(const PostedEventHandler& handler)
     {
-        m_eventHandler = handler;
+        if (m_behavior == EventBehavior::CALLBACK) {
+            m_eventHandler = handler;
+        }
     }
 
     void dummyStart(uint_fast8_t priority = 1)
@@ -76,6 +105,30 @@ public:
     QActive* getQActive()
     {
         return &m_super;
+    }
+
+    bool isRecorderEmpty() { return m_recordedEvents.isEmpty(); }
+
+    bool isAnyEventRecorded() { return !m_recordedEvents.isEmpty(); }
+
+    bool isSignalRecorded(enum_t sig)
+    {
+        if (!isAnyEventRecorded()) {
+            return false;
+        }
+
+        const auto e       = getRecordedEvent();
+        enum_t recordedSig = e->sig;
+        return recordedSig == sig;
+    }
+
+    cms::QEvtUniquePtr getRecordedEvent()
+    {
+        if (!isAnyEventRecorded()) {
+            return {};
+        }
+
+        return cms::QEvtUniquePtr(m_recordedEvents.get());
     }
 
 protected:
@@ -108,10 +161,21 @@ protected:
         return rtn;
     }
 
+protected:
+    void RecorderEventHandler(QEvt const * e)
+    {
+        if (e->sig >= Q_USER_SIG) {
+            // record the event
+            m_recordedEvents.post(e, QF_NO_MARGIN);
+        }
+    }
+
 private:
     QActive m_super;
     PostedEventHandler m_eventHandler;
     std::array<QEvt const*, InternalEventCount> m_incomingEvents;
+    EventBehavior m_behavior;
+    cms::VectorBackedQEQueue m_recordedEvents;
 };
 
 using DefaultDummyActiveObject = DummyActiveObject<50>;
