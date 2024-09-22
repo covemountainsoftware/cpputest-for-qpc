@@ -34,6 +34,7 @@
 #include "qevtUniquePtr.hpp"
 
 namespace cms {
+namespace test {
 
 /// The Dummy Active Object may be used
 /// when an active object (AO) under test is
@@ -180,6 +181,7 @@ private:
 
 using DefaultDummyActiveObject = DummyActiveObject<50>;
 
-}   // namespace cms
+}  // namespace test
+}  // namespace cms
 
 #endif   // CMS_DUMMY_ACTIVE_OBJECT_HPP

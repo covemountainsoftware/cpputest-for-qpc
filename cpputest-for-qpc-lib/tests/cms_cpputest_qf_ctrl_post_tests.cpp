@@ -32,12 +32,12 @@ using namespace cms::test;
 
 TEST_GROUP(qf_ctrl_post_tests)
 {
-    cms::DefaultDummyActiveObject* mDummy = nullptr;
+    DefaultDummyActiveObject* mDummy = nullptr;
 
     void setup() final
     {
         qf_ctrl::Setup(Q_USER_SIG, 100);
-        mDummy = new cms::DefaultDummyActiveObject();
+        mDummy = new DefaultDummyActiveObject();
         mDummy->dummyStart();
     }
 
