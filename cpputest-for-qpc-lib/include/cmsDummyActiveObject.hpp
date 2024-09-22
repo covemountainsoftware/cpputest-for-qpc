@@ -30,8 +30,10 @@
 #include <array>
 #include <functional>
 #include <cstdlib>
+#include <memory>
 #include "cmsVectorBackedQEQueue.hpp"
 #include "qevtUniquePtr.hpp"
+#include "cms_cpputest_qf_ctrl.hpp"
 
 namespace cms {
 namespace test {
@@ -96,7 +98,7 @@ public:
         }
     }
 
-    void dummyStart(uint_fast8_t priority = 1)
+    void dummyStart(uint_fast8_t priority = qf_ctrl::DUMMY_AO_A_PRIORITY)
     {
         QACTIVE_START(&m_super, priority,
                       m_incomingEvents.data(), m_incomingEvents.size(),
@@ -180,6 +182,24 @@ private:
 };
 
 using DefaultDummyActiveObject = DummyActiveObject<50>;
+using DefaultDummyActiveObjectUniquePtr =
+  std::unique_ptr<DefaultDummyActiveObject>;
+
+/**
+ * Helper method to create (allocate) and start a dummy active
+ * object
+ * @param behavior
+ * @param priority
+ * @return ptr as unique_ptr.
+ */
+inline DefaultDummyActiveObjectUniquePtr CreateAndStartDummyActiveObject(
+  DefaultDummyActiveObject::EventBehavior behavior = DefaultDummyActiveObject::EventBehavior::CALLBACK,
+  uint_fast8_t priority = qf_ctrl::DUMMY_AO_A_PRIORITY)
+{
+    auto dummy = std::make_unique<DefaultDummyActiveObject>(behavior);
+    dummy->dummyStart(priority);
+    return dummy;
+}
 
 }  // namespace test
 }  // namespace cms

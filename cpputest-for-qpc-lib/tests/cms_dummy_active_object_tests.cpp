@@ -24,8 +24,7 @@ TEST_GROUP(dummy_ao_tests)
 
 TEST(dummy_ao_tests, dummy_ao_provides_callback_by_default)
 {
-    auto dummy = std::make_unique<DefaultDummyActiveObject>();
-    dummy->dummyStart();
+    auto dummy = CreateAndStartDummyActiveObject();
     CHECK_TRUE(dummy->isRecorderEmpty());
     CHECK_FALSE(dummy->isAnyEventRecorded());
 
@@ -42,8 +41,8 @@ TEST(dummy_ao_tests, dummy_ao_provides_callback_by_default)
 
 TEST(dummy_ao_tests, dummy_ao_provides_recorder_option)
 {
-    auto dummy = std::make_unique<DefaultDummyActiveObject>(DefaultDummyActiveObject::EventBehavior::RECORDER);
-    dummy->dummyStart();
+    auto dummy = CreateAndStartDummyActiveObject(
+      DefaultDummyActiveObject::EventBehavior::RECORDER);
 
     static constexpr enum_t TEST1_SIG = Q_USER_SIG + 1;
     static constexpr enum_t TEST2_SIG = TEST1_SIG + 1;
