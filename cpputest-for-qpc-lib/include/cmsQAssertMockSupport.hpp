@@ -21,8 +21,8 @@
 ///***************************************************************************
 /// @endcond
 
-#ifndef QASSERT_MOCK_SUPPORT_HPP
-#define QASSERT_MOCK_SUPPORT_HPP
+#ifndef CMS_TEST_QASSERT_MOCK_SUPPORT_HPP
+#define CMS_TEST_QASSERT_MOCK_SUPPORT_HPP
 
 #include "qp_port.h"
 #include "qsafe.h"
@@ -52,4 +52,4 @@ inline void MockExpectQAssert(const char* module, int id)
 }   // namespace test
 }   // namespace cms
 
-#endif   // QASSERT_MOCK_SUPPORT_HPP
+#endif   // CMS_TEST_QASSERT_MOCK_SUPPORT_HPP

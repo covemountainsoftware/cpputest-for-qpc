@@ -22,7 +22,7 @@
 /// @endcond
 
 #include "CppUTest/TestHarness.h"
-#include "qassertMockSupport.hpp"
+#include "cmsQAssertMockSupport.hpp"
 
 Q_DEFINE_THIS_MODULE("QAssertTests");
 

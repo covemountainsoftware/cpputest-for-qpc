@@ -29,7 +29,7 @@
 #include "cms_cpputest.hpp"
 #include "qp_port.h" //required for Q_NORETURN definition, needed by qsafe.h
 #include "qsafe.h"
-#include "qassertMockSupport.hpp"
+#include "cmsQAssertMockSupport.hpp"
 
 void Q_onError(char const* const module, int_t const id)
 {
