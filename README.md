@@ -45,6 +45,11 @@ Benefits of this approach to unit testing active objects include:
 how to import and use from with a CMake build environment is available
 here: https://github.com/covemountainsoftware/cpputest-for-qpc-examples**
 
+# Tutorial Video
+
+A tutorial video on each of the features of this library is now available.
+See https://youtu.be/hr1qkNH1wSA.
+
 # Environment
 
 This project was developed and proven in Ubuntu 20.04 and 22.04. In theory any 
