@@ -34,8 +34,15 @@ namespace test {
 static constexpr const char* QASSERT_MOCK_NAME  = "QASSERT";
 static constexpr const char* ONERROR_FUNC_NAME  = "Q_onError";
 
+void QAssertMetaOutputEnable();
+void QAssertMetaOutputDisable();
+
 inline void MockExpectQAssert()
 {
+    //if we are formally expecting an assert,
+    //then disable the meta output.
+    QAssertMetaOutputDisable();
+
     mock(QASSERT_MOCK_NAME)
       .expectOneCall(ONERROR_FUNC_NAME)
       .ignoreOtherParameters();
@@ -43,6 +50,10 @@ inline void MockExpectQAssert()
 
 inline void MockExpectQAssert(const char* module, int id)
 {
+    //if we are formally expecting an assert,
+    //then disable the meta output.
+    QAssertMetaOutputDisable();
+
     mock(QASSERT_MOCK_NAME)
       .expectOneCall(ONERROR_FUNC_NAME)
       .withParameter("module", module)

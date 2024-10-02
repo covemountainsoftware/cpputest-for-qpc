@@ -9,6 +9,7 @@ add_compile_options(-Wall -Wextra -Werror)
 
 set(CMS_EXTERNALS_TOP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/externals)
 set(CMS_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cpputest-for-qpc-lib/cmake CACHE INTERNAL "")
+set(CMS_QASSERT_META_TOP_DIR ${CMS_EXTERNALS_TOP_DIR}/qassert-meta)
 
 if(NOT DEFINED CMS_QPC_TOP_DIR)
     set(CMS_QPC_TOP_DIR ${CMS_EXTERNALS_TOP_DIR}/qpc)
@@ -20,6 +21,14 @@ if(NOT DEFINED CMS_QPC_TOP_DIR)
     message("Fetching QP/C git repository")
     FetchContent_MakeAvailable(qpc)
 endif(NOT DEFINED CMS_QPC_TOP_DIR)
+
+FetchContent_Declare(qassert-meta
+        GIT_REPOSITORY https://github.com/covemountainsoftware/qassert-meta.git
+        GIT_TAG        a53c87e1a351f9c0444fcd2c68bb0583e2109b11
+        SOURCE_DIR     ${CMS_QASSERT_META_TOP_DIR}
+)
+message("Fetching qassert-meta git repository")
+FetchContent_MakeAvailable(qassert-meta)
 
 include(${CMS_CMAKE_DIR}/qpcCMakeSupport.cmake)
 add_subdirectory(cpputest-for-qpc-lib)

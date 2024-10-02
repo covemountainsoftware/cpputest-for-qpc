@@ -29,6 +29,8 @@
 #include <cassert>
 #include <vector>
 #include "CppUTest/TestHarness.h"
+#include "qassert-meta.h"
+#include "cmsQAssertMockSupport.hpp"
 
 namespace cms {
 namespace test {
@@ -79,6 +81,9 @@ void Setup(enum_t const maxPubSubSignalValue, uint32_t ticksPerSecond,
     else {
         CreatePoolConfigsFromArg(pubSubEventMemPoolConfigs);
     }
+
+    QAssertMetaInit();
+    QAssertMetaOutputEnable();
 
     QF_init();
     QF_psInit(l_subscriberStorage->data(), maxPubSubSignalValue);
