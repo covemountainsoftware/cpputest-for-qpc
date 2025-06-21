@@ -52,8 +52,8 @@ See https://youtu.be/hr1qkNH1wSA.
 
 # Environment
 
-This project was developed and proven in Ubuntu 20.04 and 22.04. In theory any 
-build or host operating system environment supported by CppUTest will 
+This project was developed and proven in Ubuntu, currently targeting 24.04. 
+In theory any build or host operating system environment supported by CppUTest will 
 be compatible with this code.
 
 ## Prerequisites
@@ -65,7 +65,7 @@ be compatible with this code.
     Define the cmake variable CMS_QPC_TOP_DIR before including the internal CMakeLists.txt. 
   * or:
     * Do not define CMS_QPC_TOP_DIR, and the internal cmake will fetch the appropriate QP/C repo.
-* CppUTest (version 3.8-7 or version 4.0) (3.8 is the default in Ubuntu 20.04 while 4.0 is the default in Ubuntu 22.04)
+* CppUTest (version 4.0) 
 * This project requires support for C++14 and C11.
 
 ## Continuous Integration
