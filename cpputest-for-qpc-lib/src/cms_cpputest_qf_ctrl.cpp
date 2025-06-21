@@ -71,7 +71,15 @@ void Setup(enum_t const maxPubSubSignalValue, uint32_t ticksPerSecond,
     l_subscriberStorage->resize(static_cast<size_t>(maxPubSubSignalValue));
     QSubscrList nullValue;
     QPSet_setEmpty(&nullValue.set);
+
+#if QP_VERSION >= 800U
+    //safety fields eliminated from GPL version of QP starting in v8.x.x
+#elif QP_VERSION > 700U
     QPSet_setEmpty(&nullValue.set_dis);
+#else
+    #error "unsupported QP version"
+#endif
+
     std::fill(l_subscriberStorage->begin(), l_subscriberStorage->end(),
               nullValue);
 

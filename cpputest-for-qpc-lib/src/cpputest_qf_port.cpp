@@ -52,6 +52,16 @@ extern "C" void QF_stop(void)
     QF_onCleanup();
 }
 
+#if QP_VERSION >= 800U
+extern "C" void QActive_start(QActive * const me,
+                               QPrioSpec const prioSpec,
+                               QEvt const * * const qSto,
+                               uint_fast16_t const qLen,
+                               void * const stkSto,
+                               uint_fast16_t const stkSize,
+                               void const * const par)
+
+#elif QP_VERSION > 700U
 extern "C" void QActive_start_(QActive * const me,
                                QPrioSpec const prioSpec,
                                QEvt const * * const qSto,
@@ -59,6 +69,9 @@ extern "C" void QActive_start_(QActive * const me,
                                void * const stkSto,
                                uint_fast16_t const stkSize,
                                void const * const par)
+#else
+#error "unsupported QP version"
+#endif
 {
     Q_UNUSED_PAR(stkSto);
     Q_UNUSED_PAR(stkSize);
