@@ -42,7 +42,7 @@ extern "C" {
 #define QF_MAX_TICK_RATE    2U
 #define QACTIVE_CAN_STOP      1
 #define QF_EVENT_SIZ_SIZE   4U
-#define QF_EQUEUE_CTR_SIZE  4U
+#define QF_EQUEUE_CTR_SIZE  2U
 #define QF_MPOOL_SIZ_SIZE   4U
 #define QF_MPOOL_CTR_SIZE   4U
 #define QF_TIMEEVT_CTR_SIZE 4U
