@@ -16,6 +16,8 @@ add_library(cpputest-for-qpc-lib
 target_link_libraries(cpputest-for-qpc-lib qassert-meta-lib)
 add_subdirectory(tests)
 
+target_compile_options(cpputest-for-qpc-lib PRIVATE -Wall -Wextra -Werror -Wpedantic -Wsign-conversion)
+
 target_include_directories(cpputest-for-qpc-lib PUBLIC
         ${CMS_QPC_INCLUDE_DIR}
         include)

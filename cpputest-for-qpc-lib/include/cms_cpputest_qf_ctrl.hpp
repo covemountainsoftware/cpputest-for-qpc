@@ -99,7 +99,7 @@ void PublishEvent(QEvt const * e);
 /// Publish a trivial QEvt event to the QF framework followed internally
 /// by ProcessEvents().
 /// \param sig
-/// \param recorder, if provided, will automatically ensure the published
+/// \param recorder if provided, will automatically ensure the published
 ///                  event is ignored by the recorder.
 void PublishAndProcess(enum_t sig,
                        PublishedEventRecorder* recorder = nullptr);

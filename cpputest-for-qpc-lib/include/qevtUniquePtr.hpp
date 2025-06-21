@@ -31,8 +31,8 @@ namespace cms {
 
 /// I love a nice RAII pattern, such as std::unique_ptr.
 /// A QEvt may have been allocated from an event pool, which must be
-/// garbage collected. This is easy to forget, and is therefore more error
-/// prone, especially when deferring events or recording events. This
+/// garbage collected. This is easy to forget, and is therefore more
+/// error-prone, especially when deferring events or recording events. This
 /// class helps guarantee that the event is appropriately garbage collected.
 ///
 /// https://covemountainsoftware.com/2019/11/26/why-i-prefer-c-raii-all-the-things/
@@ -53,7 +53,7 @@ public:
         }
     }
 
-    QEvtUniquePtr(QEvtUniquePtr&& o) noexcept : m_evt(std::move(o.m_evt))
+    QEvtUniquePtr(QEvtUniquePtr&& o) noexcept : m_evt(o.m_evt)
     {
         o.m_evt = nullptr;
     }
@@ -69,7 +69,7 @@ public:
 
     bool operator!=(void* ptr) const { return ptr != m_evt; }
 
-    const QEvt* get() noexcept { return m_evt; }
+    const QEvt* get() const noexcept { return m_evt; }
 
 private:
     QEvt const* m_evt;

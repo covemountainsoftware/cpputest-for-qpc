@@ -29,7 +29,6 @@
 #include "cmsDummyActiveObject.hpp"
 #include "cmsVectorBackedQEQueue.hpp"
 #include "qevtUniquePtr.hpp"
-#include <vector>
 
 namespace cms {
 namespace test {
@@ -60,7 +59,7 @@ public:
 
     /// Upon construction and init/start, this active object will
     /// subscribe and record all events in the signal range:
-    ///         [startingValue .. endValue)
+    ///         [startingValue ... endValue)
     /// \param startingValue - starting sig value the recorder will record
     /// \param endValue - final value in sig range to record. This value is
     ///                   NOT recorded, rather "endValue - 1" is recorded.
@@ -102,11 +101,11 @@ public:
         }
     }
 
-    bool isEmpty() { return m_recordedEvents.isEmpty(); }
+    bool isEmpty() const { return m_recordedEvents.isEmpty(); }
 
-    bool isAnyEventRecorded() { return !m_recordedEvents.isEmpty(); }
+    bool isAnyEventRecorded() const { return !m_recordedEvents.isEmpty(); }
 
-    bool isSignalRecorded(enum_t sig)
+    bool isSignalRecorded(const enum_t sig)
     {
         if (!isAnyEventRecorded()) {
             return false;
@@ -117,10 +116,10 @@ public:
         return recordedSig == sig;
     }
 
-    cms::QEvtUniquePtr getRecordedEvent()
+    QEvtUniquePtr getRecordedEvent()
     {
         if (!isAnyEventRecorded()) {
-            return cms::QEvtUniquePtr();
+            return {};
         }
 
         return cms::QEvtUniquePtr(m_recordedEvents.get());

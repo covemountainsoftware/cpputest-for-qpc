@@ -41,7 +41,7 @@ extern "C" void QF_init(void)
          ++tickRate)
     {
         QTimeEvt_ctorX(&QTimeEvt_timeEvtHead_[tickRate],
-                       (QActive *)0, Q_USER_SIG, tickRate);
+                       nullptr, Q_USER_SIG, tickRate);
     }
 
     bzero(&QActive_registry_[0], static_cast<uint_fast16_t>(sizeof(QActive_registry_)));

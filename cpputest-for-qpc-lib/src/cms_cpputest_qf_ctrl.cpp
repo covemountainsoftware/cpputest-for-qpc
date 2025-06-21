@@ -68,7 +68,7 @@ void Setup(enum_t const maxPubSubSignalValue, uint32_t ticksPerSecond,
     l_memPoolOption     = memPoolOpt;
     l_ticksPerSecond    = ticksPerSecond;
     l_subscriberStorage = new SubscriberList();
-    l_subscriberStorage->resize(maxPubSubSignalValue);
+    l_subscriberStorage->resize(static_cast<size_t>(maxPubSubSignalValue));
     QSubscrList nullValue;
     QPSet_setEmpty(&nullValue.set);
     QPSet_setEmpty(&nullValue.set_dis);
