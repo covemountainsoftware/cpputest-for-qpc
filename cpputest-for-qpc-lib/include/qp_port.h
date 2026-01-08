@@ -27,6 +27,7 @@
 
 #include <stdint.h>  // Exact-width types. WG14/N843 C99 Standard
 #include <stdbool.h> // Boolean type.      WG14/N843 C99 Standard
+#include <stddef.h>  // size_t
 
 #ifdef __cplusplus
 extern "C" {
