@@ -15,7 +15,7 @@ if(NOT DEFINED CMS_QPC_TOP_DIR)
     set(CMS_QPC_TOP_DIR ${CMS_EXTERNALS_TOP_DIR}/qpc)
     FetchContent_Declare(qpc
             GIT_REPOSITORY https://github.com/QuantumLeaps/qpc.git
-            GIT_TAG        6cbb42cf26f10e8ba1fff887f5fd66f674b2d92a #8.0.4
+            GIT_TAG        2579f10c33566a4a447eaa6027995e70add386f4 #8.1.2
             SOURCE_DIR     ${CMS_QPC_TOP_DIR}
     )
     message("Fetching QP/C git repository")
