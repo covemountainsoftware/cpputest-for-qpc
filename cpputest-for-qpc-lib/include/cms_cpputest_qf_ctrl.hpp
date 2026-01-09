@@ -26,6 +26,7 @@
 #define CMS_CPPUTEST_QF_CTRL_HPP
 
 #include "qpc.h"
+#include "cms_qevt_initializer.hpp"
 #include <chrono>
 #include <vector>
 
@@ -123,7 +124,7 @@ inline void PostAndProcess(QEvt const * e, QActive* dest)
 template <enum_t sig>
 inline void PostAndProcess(QActive* dest)
 {
-    static const QEvt constEvent = QEVT_INITIALIZER(sig);
+    static const QEvt constEvent = CMS_QEVT_INITIALIZER(sig);
     PostAndProcess(&constEvent, dest);
 }
 

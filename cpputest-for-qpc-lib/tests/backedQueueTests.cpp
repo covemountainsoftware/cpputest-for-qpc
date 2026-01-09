@@ -25,6 +25,7 @@
 #include "../include/cmsArrayBackedQEQueue.hpp"
 #include <memory>
 #include "CppUTest/TestHarness.h"
+#include "cms_qevt_initializer.hpp"
 
 using namespace cms;
 
@@ -87,7 +88,7 @@ TEST(BackedQueueTests, can_push_up_to_max_events_to_array_backed)
     auto underTest      = std::unique_ptr<ArrayTestType>(new ArrayTestType());
 
     // fill up the queue
-    static QEvt testEvent {5, 0, 0};
+    static QEvt testEvent CMS_QEVT_INITIALIZER(5);
     for (size_t i = 0; i < underTest->capacity(); ++i) {
         underTest->post(&testEvent, QF_NO_MARGIN);
     }
@@ -113,7 +114,7 @@ TEST(BackedQueueTests, can_push_up_to_max_events_to_vector_backed)
       new VectorBackedQEQueue(MaxStorageForEvents));
 
     // fill up the queue
-    static QEvt testEvent {5, 0, 0};
+    static QEvt testEvent CMS_QEVT_INITIALIZER(5);
     for (size_t i = 0; i < underTest->capacity(); ++i) {
         underTest->post(&testEvent, QF_NO_MARGIN);
     }
