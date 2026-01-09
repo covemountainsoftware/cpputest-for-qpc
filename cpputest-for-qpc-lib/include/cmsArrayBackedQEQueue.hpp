@@ -62,7 +62,11 @@ public:
 
     QEQueueCtr getNFree()
     {
+        #if QP_VERSION < 810
         return QEQueue_getNFree(&m_queue);
+        #else
+        return QEQueue_getFree(&m_queue);
+        #endif
     }
 
     QEvt const * get()
