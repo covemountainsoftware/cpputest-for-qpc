@@ -44,7 +44,7 @@ extern "C" void QF_init(void)
                        nullptr, Q_USER_SIG, tickRate);
     }
 
-    bzero(&QActive_registry_[0], static_cast<uint_fast16_t>(sizeof(QActive_registry_)));
+    std::memset(&QActive_registry_[0], 0, sizeof(QActive_registry_));
 }
 
 extern "C" void QF_stop(void)
